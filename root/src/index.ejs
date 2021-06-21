@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Microfrontend Demo</title>
+  <meta name="importmap-type" content="systemjs-importmap" />
+
+  <% if (!isLocal) { %>
+  <script type="systemjs-importmap" src=""></script>
+  <% } %>
+
+  <% if (isLocal) { %>
+  <script type="systemjs-importmap">
+    {
+      "imports": {        
+        "react": "https://cdn.jsdelivr.net/npm/react@16.13.0/umd/react.production.min.js",
+        "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@16.13.0/umd/react-dom.production.min.js",
+        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.3.0/lib/system/single-spa.min.js",
+        "@bangits-platform/cms": "//localhost:9001/bangits-platform-cms-mfe.js",
+        "@bangits-platform/root-config": "//localhost:9000/bangits-platform-cms-config.js",
+        "rxjs": "https://cdn.jsdelivr.net/npm/@esm-bundle/rxjs/system/rxjs.min.js",
+        "rxjs/operators": "https://cdn.jsdelivr.net/npm/@esm-bundle/rxjs/system/rxjs-operators.min.js"
+      }
+    }
+  </script>
+  <% } %>
+  <script src="https://cdn.jsdelivr.net/npm/import-map-overrides/dist/import-map-overrides.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.3.1/dist/system.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/extras/amd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/extras/named-exports.min.js"></script>
+</head>
+<body>
+  <div id="mf-content"></div>
+  <script>
+    System.import('@bangits-platform/root-config');
+  </script>
+  <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
+</body>
+</html>
